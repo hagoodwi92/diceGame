@@ -35,7 +35,7 @@ Player.prototype.rollDie = function ()  {
 Player.prototype.winCheck = function () {
   if (this.turnTotal >= 10) {
     alert("Game Over! You win!");
-  }
+  } 
 }
 
 // Player.prototype.notOne = function () {
@@ -51,21 +51,20 @@ function Player(currentRoll , turnTotal, finalScore){
 }
 
 //ui
+
+
+
 $(document).ready(function()  {
-  $("#rollButton").submit(function(event)  {
+  $("form#new-contact").submit(function(event) {
     event.preventDefault();
-    $("#roll").text(this.currentRoll);
+    let player = new Player();
 
     
-    let player = new Player();
-    let player1 = new Player();
-    player.rollDie(player);
-    alert(this.currentRoll);
+    alert("Your current roll is " + player.rollDie(player));
+    alert("turnTotal is " + player.turnTotal);
+    alert("Your turnTotal is " + player.rollOne(player));
 
 
-
-  
-  
   })
 })
 
