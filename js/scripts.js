@@ -9,19 +9,19 @@ PlayerBook.prototype.addPlayer = function (player) {
 }
 
 Player.prototype.rollOne = function ()  {
-  if (this.currentRoll === 1) {
+  if (this.currentRoll == 1) {
    this.currentRoll = 0;
+   this.finalScore = this.turnTotal;
+   return alert("Game Over, your score is " + this.finalScore);
 } else {
-  this.currentRoll += this.turnTotal;
+   this.turnTotal = this.currentRoll + this.turnTotal;
+   return this.turnTotal;
 }
 }
 
-Player.prototype.ifNotOne = function () {
-  
-  
-}
-
-PlayerBook.prototype.ifHold = function (player) {
+Player.prototype.hold = function () {
+  this.finalScore = this.turnTotal + this.finalScore;
+  return this.finalScore;
   //turn total = score, other players turn
 }
 
@@ -32,6 +32,18 @@ Player.prototype.rollDie = function ()  {
   return this.currentRoll;
 }
 
+Player.prototype.winCheck = function () {
+  if (this.turnTotal >= 10) {
+    alert("Game Over! You win!");
+  }
+}
+
+// Player.prototype.notOne = function () {
+//   //add current to turn total, players turn continues
+//   this.currentRoll += this.turnTotal;
+//   return this.turnTotal;
+// }
+
 function Player(currentRoll , turnTotal, finalScore){
   this.currentRoll = 0;
   this.turnTotal = 0;
@@ -40,13 +52,20 @@ function Player(currentRoll , turnTotal, finalScore){
 
 //ui
 $(document).ready(function()  {
-  let playerBook = new PlayerBook();
-  let player = new Player();
-  let player1 = new Player();
-  playerBook.addPlayer(player);
-  playerBook.addPlayer(player1);
-  player.rollDie(player);
+  $("#rollButton").submit(function(event)  {
+    event.preventDefault();
+    $("#roll").text(this.currentRoll);
+
+    
+    let player = new Player();
+    let player1 = new Player();
+    player.rollDie(player);
+    alert(this.currentRoll);
+
+
+
   
   
+  })
 })
 
