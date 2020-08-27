@@ -1,22 +1,14 @@
 //business
-function PlayerBook() {
-  this.players = [];
+Player.prototype.rollOne = function () {
 
-}
-
-PlayerBook.prototype.addPlayer = function (player) {
-  this.players.push(player);
-}
-
-Player.prototype.rollOne = function ()  {
   if (this.currentRoll == 1) {
-   this.currentRoll = 0;
-   this.finalScore = this.turnTotal;
-   return alert("Game Over, your score is " + this.finalScore);
-} else {
-   this.turnTotal = this.currentRoll + this.turnTotal;
-   return this.turnTotal;
-}
+    this.currentRoll = 0;
+    this.finalScore = this.turnTotal;
+    return alert("Game Over, your score is " + this.finalScore);
+  } else {
+    this.turnTotal = this.currentRoll + this.turnTotal;
+    return this.turnTotal;
+  }
 }
 
 Player.prototype.hold = function () {
@@ -26,16 +18,16 @@ Player.prototype.hold = function () {
 }
 
 
-Player.prototype.rollDie = function ()  {
+Player.prototype.rollDie = function () {
   //changes currentroll to random number in player object
-  this.currentRoll = Math.floor(6*Math.random())+1;
+  this.currentRoll = Math.floor(6 * Math.random()) + 1;
   return this.currentRoll;
 }
 
 Player.prototype.winCheck = function () {
   if (this.turnTotal >= 10) {
     alert("Game Over! You win!");
-  } 
+  }
 }
 
 // Player.prototype.notOne = function () {
@@ -44,7 +36,7 @@ Player.prototype.winCheck = function () {
 //   return this.turnTotal;
 // }
 
-function Player(currentRoll , turnTotal, finalScore){
+function Player(currentRoll, turnTotal, finalScore) {
   this.currentRoll = 0;
   this.turnTotal = 0;
   this.finalScore = 0;
@@ -54,16 +46,16 @@ function Player(currentRoll , turnTotal, finalScore){
 
 
 
-$(document).ready(function()  {
-  $("form#new-contact").submit(function(event) {
+$(document).ready(function () {
+  $("form#new-contact").submit(function (event) {
     event.preventDefault();
     let player = new Player();
 
-    
-    alert("Your current roll is " + player.rollDie(player));
-    alert("turnTotal is " + player.turnTotal);
-    alert("Your turnTotal is " + player.rollOne(player));
-
+    while (player.turnTotal <= 20) {
+  
+      alert("Your current roll is " + player.rollDie(player));
+      alert("Your turntotal is " + player.rollOne(player));
+    }
 
   })
 })
